@@ -2,6 +2,8 @@ class Author
     #has many posts
     #parent
 
+    @@post_count = 0
+
     attr_accessor :name
     def initialize(name)
         @name = name
@@ -19,6 +21,8 @@ class Author
         @posts << post
 
         post.author= (self) if post.author != self
+
+        @@post_count += 1
     end
 
     def posts
@@ -29,7 +33,10 @@ class Author
         post = Post.new(title)
         post.author = self if post.author != self
         @posts << post
+    end
 
+    def self.post_count
+        @@post_count
     end
 
 end
