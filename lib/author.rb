@@ -1,18 +1,24 @@
 class Author
+    #has many posts
+    #parent
 
-    attr_accessor :name, :posts
-
-    @@post_count = 0
-
+    attr_accessor :name
     def initialize(name)
         @name = name
         @posts = []
     end
 
+    # def add_post(post)
+    #     #post = Post.new(tittle)
+    #     post.author = self if post.author != self
+
+    #     @posts << post
+    # end
+
     def add_post(post)
         @posts << post
-        post.author = self
-        @@post_count += 1
+
+        post.author= (self) if post.author != self
     end
 
     def posts
@@ -21,14 +27,9 @@ class Author
 
     def add_post_by_title(title)
         post = Post.new(title)
+        post.author = self if post.author != self
         @posts << post
-        #we aer in instance method therefor self reffers to a instance of Author class
-        post.author=(self)
-        @@post_count += 1
-    end
 
-    def self.post_count
-        @@post_count
     end
 
 end

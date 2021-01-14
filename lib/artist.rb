@@ -1,17 +1,21 @@
 class Artist
+    #has many songs
+    #parent class
     attr_accessor :name
 
     @@song_count = 0
 
     def initialize(name)
         @name = name
-        @songs = []
+        @songs = []        
     end
 
     def add_song(song)
         @songs << song
-        song.artist = self
-        @@song_count +=1
+        #song = Song.new(name)
+        song.artist = self if song.artist != self
+
+        @@song_count += 1
     end
 
     def songs
@@ -20,9 +24,10 @@ class Artist
 
     def add_song_by_name(name)
         song = Song.new(name)
-        @songs << song
         song.artist = self
-        @@song_count +=1
+        @songs << song
+
+        #@@song_count += 1
     end
 
     def self.song_count
@@ -30,10 +35,6 @@ class Artist
     end
 
 end
-
-# drake = Artist.new("Drake")
-
-# puts drake
 
 # describe "#songs" do
 #       it "has many songs" do
